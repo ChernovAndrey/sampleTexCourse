@@ -1,0 +1,442 @@
+\documentclass[11pt,hyperref={unicode}]{beamer}       % размер слайдов по-умолчанию
+
+\usepackage{cmap}
+
+\usepackage[cp1251]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+
+\usepackage{multimedia}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%\usetheme{default}                 % схема презентации
+\usetheme{CambridgeUS}
+%\usetheme{Berkeley}
+%\usecolortheme{default}           %цветовая гамма
+%\usecolortheme{dove}              % цветовая тема для печати на принтере
+\useoutertheme{default}            %внешняя структура
+\useinnertheme{default}            %внутренняя структура - определяет оформление
+                              %перечней, списков, блоков, теорем и таблиц содержания
+
+%\setbeamercolor{page number in foot}{fg=red}
+\setbeamertemplate{footline}[page number]     % добавление номера страницы на слайд
+
+
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{logo.png}}      % картинка фоном
+
+\newtheorem{rustheorem}{Теорема}      % переопределение theorem
+
+\title{Создание презентации в пакете Beamer}    % заголовок
+\institute{МГТУ им. Н.Э. Баумана}                               %
+\author[ФН-2]{Кафедра "Прикладная математика"}                                                                      %
+\date{\today}                         %дата; хотя можно написать что угодно
+
+%\includeonlyframes{frame1,frame3}     % включение в презентацию выборочных слайдов
+
+
+\begin{document}
+
+
+\frame{\titlepage}                             % титульная страница
+
+\section{История создания}
+
+\begin{frame}
+\tableofcontents                               % оглавление
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Преимущества}
+
+\begin{frame}[label=frame1]
+%\setbeamercolor{page number in foot}{fg=red}
+\frametitle{История создания пакета Beamer}
+
+%\movie[width=5cm,height=4cm,poster,showcontrols=true]{}{pikes3.mpg}
+
+
+Тил Тантау (Till Tantau) создавал BEAMER, главным образом, в свое свободное от основной деятельности время. Первая версия BEAMER была им создана для собственной презентации используемой в защите докторской диссертации в 2003. Месяц спустя он поместил свой пакет в CTAN по запросу некоторых коллег. После этого его разработка практически вышла из под контроля.
+
+В апреле 2010, будучи неподдерживаемым с 2007 года, проект был передан на дальнейшую разработку Джозефу Райту (Joseph Wright) и Ведран Милетичу (Vedran Mileti?).В данный момент именно они продолжают дальнейшую разработку BEAMER, проводя улучшение кода, исправление ошибок, добавление новых опций и поддержку пользователей.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Создание слайда}
+
+\begin{frame}[label=frame2]
+\frametitle{Преимущества}
+\framesubtitle{Подзаголовок}
+
+Список функций BEAMER'а, довольно широк (к сожалению, так же как и список предоставляемых им ошибок)
+\begin{enumerate}
+\item В BEAMER поддерживает практически все стандартные команды \LaTeX а.
+\item Вы может легко создавать "оверлеи" и эффекты.
+\item Поддержка тем позволяют Вам изменять внешний вид своей презентации, чтобы она соответствовала любым задачам.
+\item Расположение элементов, цвета и шрифты, используемые в презентации, можно легко задать глобально для всего документа, но, в то же время,  Вы можете легко изменять любой элементом в отдельности.
+\item Окончательный результат представляет собой обычный файл формата PDF.
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Размер слайда}
+
+\begin{frame}[label=frame3]{Создание слайда}{Подзаголовок}
+%\label{frame3}
+Слайды в пакете Beamer задаются окружением \texttt{frame}, которое может иметь необязательные параметры - заголовок и подзаголовок слайда.  Заголовоки также можно задать с помощью команд \texttt{frametitle} и  \texttt{framesubtitle}.
+
+Каждый слайд может содержать следующие компоненты:
+\begin{enumerate}
+\item Верхний и нижний колонтитул
+\item Левая и правая боковые панели
+\item Панель навигации
+\item Логотип
+\item Заголовок слайда
+\item Фон
+\item Содержание
+\end{enumerate}
+
+Каждый элемент слайда определяется командой \texttt{  setbeamertemplate}
+% \begin{semiverbatim}   \\setbeamertemplate\{\} \end{semiverbatim}
+
+\end{frame}
+
+\section{Стандартные окружения}
+\subsection{block}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Размер слайда}
+
+По-умолчанию размер слайда составляет 128 мм на 96 мм. В этом случае отношение сторон слайда составляет 4:3, что в точности то, что большинство проекторов предлагают на сегодняшний день. Для того, чтобы изменить размер слайда можно использовать необязательный аргумент команды \texttt{documentclass}:
+
+\begin{semiverbatim}
+\\documentclass[aspectratio=1610]\{beamer\}  -- 160мм на 100мм
+
+\\documentclass[aspectratio=169]\{beamer\}    -- 160мм на 90мм
+
+\\documentclass[aspectratio=32]\{beamer\}    --  135мм на 90мм
+\end{semiverbatim}
+
+Также можно изменять размер левого и правого поля, которое по умолчанию 1см. Для этого нужно использовать команду \texttt{setbeamersize\{text margin left=2cm\}}, \texttt{setbeamersize\{text margin right=2cm\}}, \texttt{setbeamersize\{whidth right=2cm\}}.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{theorem, proof, example}
+
+\begin{frame}{Стандартные окружения}{block}
+
+ Окружение \texttt{block} автоматически выделяется в зависимости от выбранной схемы презентации. Возможные варианты команды \texttt{alertblock} и \texttt{exampleblock}.
+\begin{block}{Определение}
+Вероятностью события $A$ называют отношение $P(A)=\frac{N_A}{N}$
+\end{block}
+
+\begin{alertblock}{Противоречие}
+$1=2$.
+\end{alertblock}
+
+\begin{exampleblock}{Пример}
+Множество $\{1,2,3,5\}$ состоит из четырех элементов.
+\end{exampleblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Стандартные окружения}{theorem, proof, example}
+
+%\begin{theorem}
+\begin{rustheorem}[о бесконечном множестве]<1-2>
+Существует множество, содержащее бесконечное число элементов.
+\end{rustheorem}
+
+ \begin{proof}<2->
+Это следует из определения бесконечности.
+ \qedhere   % команда размещает квадратик в последней строке;
+                     % иначе команда \qed выделит под него новую строку
+\end{proof}
+
+\begin{example}<3->[Натуральные числа]
+  Множество натуральных чисел бесконечно.
+\end{example}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Создание эффектов}
+\begin{frame}[containsverbatim,shrink=20]{Создание эффектов}     %,
+Для управления видимостью блоков на различных слайдах в рамках одного кадра используются следующие команды (нумерация слайдов начинается с 1):\\[5mm]
+    \verb'\onslide<N>{текст}' — текст виден на слайде номер N, на остальных он помечен цветом неактивного текста;\\[5mm]
+    \verb'\only<N>{текст}' — текст виден лишь на слайде N, не занимая места на других;\\[5mm]
+    \verb'\visible<N>{текст}' — текст присутствует лишь на слайде N, а на других не виден, но занимает место;\\[5mm]
+    \verb'\invisible<N>{текст}' — на слайде N текст не виден, но занимает место, на остальных он присутствует;\\[5mm]
+    \verb'\alt<N>{текст 1}{текст 2}' — на слайде N появится «текст 1», на остальных — «текст 2»;\\[5mm]
+    \verb'\temporal<N>{до}{текст}{после}' — на слайде N появится «текст», на предыдущих слайдах — «до», на последующих — «после»;\\[5mm]
+    \verb'\uncover<N>{текст}' — обратная команде \verb'\onslide'.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{pause}
+
+\begin{frame}{ Создание эффектов}{Команда pause}
+Команда \textbf<1,3>{pause} задерживает появление элементов слайда.
+%\pause
+\begin{itemize}
+\pause \item Первый элемент списка
+\pause \item Второй элемент списка
+\pause \item Третий элемент списка
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{only}
+
+\begin{frame}{ Создание эффектов}{Команда only}
+Команда \texttt{only} отображать каждый последующий элемент на месте предыдущего.
+\begin{itemize}
+\only<1>{\item Первый элемент списка}
+\only<2>{\item Второй элемент списка}
+\only<3>{\item Третий элемент списка}
+\end{itemize}
+
+\noindent
+\invisible<1,3>{Для второго элемента}
+\visible<1>{Для первого элемента}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{onslide}
+\begin{frame}{ Создание эффектов}{Команда onslide}
+Первый элемент слайда (первое нажатие).
+\onslide<2-3>                                     % обратная команда \uncover<N>{текст}
+Второй и третий элемент слайда (второе и третье нажатие).
+\begin{itemize}
+\item Второй и третий элемент списка (второе и третье нажатие).
+\onslide<4->
+\item Четвертый элемент списка (четвертое и последующие нажатия).
+\end{itemize}
+Появление элемента на четвертое нажатие.
+
+\onslide Элемент всегда на слайде.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Команды для абзаца}
+\begin{frame}{ Создание эффектов}{Команды для абзацев}
+Все эти команды действуют лишь на предложения, содержащие один абзац.
+
+\begin{visibleenv}<2>
+Если нам нужно выделить таким образом блок из нескольких абзацев, их необходимо заключить внутрь одноименного окружения: onlyenv, altenv, visibleenv, uncoverenv, invisibleenv.
+
+Абзац 2
+
+Абзац 3
+\end{visibleenv}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Анимация}
+
+\begin{frame}[containsverbatim,shrink=20]{Анимация}
+\transboxout  %,
+ Для задания типа анимации слайдов необходимо использовать команду \verb'\transOVR<слайды>[опции]', где OVR:\\[5mm]
+
+    blindshorizontal — слайд «разрезается» вертикальными полосами;\\[5mm]
+    blindsvertical — слайд «разрезается» горизонтальными полосами;\\[5mm]
+    boxin — старый слайд «стягивается» в точку по центру экрана;\\[5mm]
+    boxout — новый слайд «растягивается» из точки по центру;\\[5mm]
+    dissolve — слайд сменяется мозаикой;\\[5mm]
+    glitter — смесь dissolve с wipe;\\[5mm]
+    splitverticalin «стягивается» сверху и снизу;\\[5mm]
+    splitverticalout «растягивается» сверху и снизу;\\[5mm]
+    wipe — следующий слайд «выезжает» слева.\\[5mm]
+
+«Cлайды» — необязательная опция, указывающая, к каким конкретно вариантам из данной последовательности внутри слайда применить переходы. «опции» — необязательные опции: duration=seconds — время на переход; direction=degrees — направление перехода.
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Выбор и настройка темы презентации}
+
+\begin{frame}
+\frametitle{Выбор и настройка темы презентации}
+
+Сочетание следующих 5ти параметров дает возможность получать различные визуальные эффекты.
+\medskip
+
+
+\begin{description}
+\item[ Тема презентации:] \begin{semiverbatim}   \\ usetheme \end{semiverbatim}  default, Warsaw, Bergen, Boadilla, Madrid, CambridgeUS, Antibes, JuanLesPins, Montpellier, Berkeley, Boadilla, Goettingen.
+\item[ Цвет презентации: ] \begin{semiverbatim}   \\ usecolortheme \end{semiverbatim}  default, albatross, crane, wolverine, sidebartab, rose.
+\item[Внешняя тема: ]  \begin{semiverbatim}   \\ useoutertheme \end{semiverbatim} default, infolines, shadow, split, smoothbars, sidebar, tree.
+\item[Внутренняя тема: ]  \begin{semiverbatim}   \\ useinnertheme \end{semiverbatim} default, circles, rectangles, rounded, inmargin.
+
+\end{description}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Выбор темы презентации}{примеры тем без навигационной панели}
+\begin{center}
+ \begin{semiverbatim}   \\ usecolortheme\{ default\} \end{semiverbatim}
+\includegraphics[width=90mm]{default.png}
+\begin{semiverbatim}   \\ usecolortheme\{  Bergen\} \end{semiverbatim}
+\includegraphics[width=90mm]{Bergen.png}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Выбор темы презентации}{примеры тем без навигационной панели}
+\begin{center}
+ \begin{semiverbatim}   \\ usecolortheme\{ CambridgeUS\} \end{semiverbatim}
+\includegraphics[width=90mm]{CambridgeUS.png}
+ \begin{semiverbatim}   \\ usecolortheme\{ AnnArbor\} \end{semiverbatim}
+\includegraphics[width=90mm]{AnnArbor.png}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Выбор темы презентации}
+ \framesubtitle{примеры тем c навигационной панелью}
+\includegraphics[width=90mm]{Antibes.png}  Antibes
+
+\includegraphics[width=90mm]{Montpellier.png}  Montpellier
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Выбор темы презентации}
+ \framesubtitle{примеры тем c панелью содержания}
+\includegraphics[width=90mm]{Berkeley.png}  Berkeley
+
+\includegraphics[width=90mm]{Hannover.png}  Hannover
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Выбор темы презентации}
+ \framesubtitle{примеры тем c панелью содержания}
+\includegraphics[width=90mm]{Marburg.png}  Marburg
+
+\includegraphics[width=90mm]{Goettingen.png}  Goettingen
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{ Темы внутренней структуры презентации}
+\begin{center}
+ \begin{semiverbatim}   \\ usecolortheme\{ default\} \end{semiverbatim}
+\includegraphics[width=90mm]{default_inner.png}
+ \begin{semiverbatim}   \\ usecolortheme\{ inmargin\} \end{semiverbatim}
+\includegraphics[width=90mm]{inmargin_inner.png}
+\end{center}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{ Темы внешней структуры презентации}
+\begin{center}
+ \begin{semiverbatim}   \\ usecolortheme\{ infolines\} \end{semiverbatim}
+\includegraphics[width=90mm]{infolines_outer.png}
+ \begin{semiverbatim}   \\ usecolortheme\{ sidebar\} \end{semiverbatim}
+\includegraphics[width=90mm]{sidebar_outer.png}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Выбор цветов в презентации}
+ \framesubtitle{}
+  \begin{semiverbatim}   \\ usecolortheme\{default\} \end{semiverbatim}
+
+ \includegraphics[width=90mm]{default_color.png}
+ \begin{semiverbatim}   \\ usecolortheme\{structured\} \end{semiverbatim}
+ \includegraphics[width=90mm]{structure_color.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Выбор цветов в презентации}
+ \framesubtitle{}
+  \begin{semiverbatim}   \\ usecolortheme\{albatross\} \end{semiverbatim}
+
+ \includegraphics[width=90mm]{albatross_color.png}
+
+ \begin{semiverbatim}   \\ usecolortheme\{beetle\} \end{semiverbatim}
+
+ \includegraphics[width=90mm]{beetle_color.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Выбор цветов в презентации}
+ \framesubtitle{}
+  \begin{semiverbatim}   \\ usecolortheme\{crane\} \end{semiverbatim}
+
+ \includegraphics[width=90mm]{crane_color.png}
+
+ \begin{semiverbatim}   \\ usecolortheme\{rose\} \end{semiverbatim}
+
+ \includegraphics[width=90mm]{rose_color.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Переопределение цвета элементов презентации}
+ \framesubtitle{}
+
+Задать {\color{red} красный} цвет текста
+
+Цветовая схема элементов задается командой setbeamercolor.
+
+ \begin{semiverbatim}   \\setbeamercolor\{math text\}\{fg=orange\} \end{semiverbatim}
+  \begin{semiverbatim}   \\setbeamercolor\{normal text\}\{fg=red,bg=black\} \end{semiverbatim}
+  \begin{semiverbatim}   \\setbeamercolor\{item\}\{fg=orange\} \end{semiverbatim}
+
+ Фон слайда задается командой \texttt{setbeamercolor\{background canvas\}\{bg=red!10\}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Видео}
+
+\movie[width=5cm,height=4cm,poster,showcontrols=true]{}{pikes3.mpg}
+%\includemovie[poster]{5cm}{4cm}{pikes3.mpg}
+
+\end{frame}
+
+
+\end{document}
+
+
+
+
+
+
+
+

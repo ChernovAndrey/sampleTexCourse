@@ -1,0 +1,84 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[cp1251]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{hyperref}
+\usepackage[footnotes,oglav,spisok,boldsect,eqwhole,kursrab,remarks,hyperprint]{project}
+
+\begin{document}
+\cover{Дифференциальная геометрия>>, <<Применение математических пакетов}{Эволюта и эвольвента кривых.}{студент группы ФН2-53}{Сидорова Е.А.}{к.ф.-м.н., доцент кафедры ФН-2}{Новожилова О.В.}{}{}{2013}
+\tableofcontents
+\newpage
+\section-{Введение}
+\section{Постановка задачи}
+ Изучение построения эволюты и эвольвенты различных кривых.
+% \newpage
+\section{Теория}
+\subsection{Основные определения}
+\subsubsection{Определение эволюты.}
+
+\textbf{Определение 1.}
+Геометрическое место центров кривизны для всевозможных точек данной кривой называется её эволютой.
+Уравнение эволюты для кривой заданной уравнениями
+\begin{equation}
+\label{evolute}
+\left\{
+\begin{array}{cc}
+ x&=x(t)  \\
+ y&=y(t) \\
+\end{array}
+\right. ,
+ t\epsilon R
+\end{equation}
+выглядит так:
+\[
+\left\{
+\begin{array}{cc}
+  X=& x(t)-y'(t)\frac{(x'(t))^2+(y'(t))^2}{x''(t) y'(t) - y''(t) x'(t)},\\
+  Y=& y(t)+x'(t)\frac{(x'(t))^2+(y'(t))^2}{x''(t) y'(t) - y''(t) x'(t)} .\\
+\end{array}
+\right.
+\]
+Но мы будем использовать другое определение эволюты.\\
+
+
+
+\textbf{Определение 2.}
+Эволюта - это огибающая семейства нормалей исходной кривой.
+
+\begin{center}
+\figbox{10cm}{8cm}{opr11.jpg}{fig1}[Красным цветом обозначается построенная эволюта.]
+\end{center}
+
+ Введем дополнительно определение огибающей.\\
+
+\textbf{Определение 3.}
+Пусть имеется семейство кривых $\gamma$, зависящих от параметра $\alpha$ и задающихся уравнением:$F(\alpha,x,y)= 0$ . Тогда огибающая семейства кривых определяется как множество точек, для которых выполнено
+$F(\alpha,x,y)=\frac{\partial F}{\partial \alpha}(\alpha,x,y)$
+для некоторого значения , где $\frac{\partial F}{\partial \alpha}$ — частная производная функции по параметру .
+
+\newpage
+\subsubsection{Определение эвольвенты.}
+
+\textbf{Определение 4.} Эвольвента кривой $\gamma$ - это кривая $\gamma_*$, по отношению к которой $\gamma$ является эволютой.
+Иными словами это кривая, нормаль в каждой точке которой является касательной к исходной кривой.
+\begin{center}
+\picbox{10cm}{10cm}{opr21.jpg}{\emph{Зеленым цветом обозначается построенная эвольвента.}}
+\end{center}
+\subsection{Вывод формул.}
+\subsubsection{Уравнение эволюты}
+
+\begin{center}
+\picbox{4cm}{4cm}{opr21.jpg}{а}
+\picbox{4cm}{4cm}{opr21.jpg}{б}
+\picbox{4cm}{4cm}{opr21.jpg}{в}
+\end{center}
+\figcap[Несколько эвольвент]{fig2}
+
+\begin{thebibliography}{9}
+\bibitem{source1} Источник 1
+\bibitem{source2} Источник 2
+\end{thebibliography}
+
+\end{document} 
